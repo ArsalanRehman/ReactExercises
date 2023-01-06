@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 const UseEffectBasics = () => {
   const [num, setNum] = useState(0);
   useEffect(() => {
-    document.title = `NewMessages (${num}) `;
+    document.title = `NewMessages(${num}) `;
   });
   return (
     <>
