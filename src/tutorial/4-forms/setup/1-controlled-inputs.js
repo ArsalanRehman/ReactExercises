@@ -6,7 +6,58 @@ import React, { useState } from 'react';
 // value, onChange
 
 const ControlledInputs = () => {
-  return <h1>controlled inputs</h1>;
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [person, setPerson] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name && email) {
+      const person = { id: new Date().getTime().toString(), name, email };
+      setPerson((people) => {
+        return [...people, person];
+      });
+      setName('');
+      setEmail('');
+    }
+    console.log('clicked');
+  };
+  return (
+    <>
+      <article>
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="form-control">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="form-control">
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <button type="submit">Add User</button>
+        </form>
+        {person.map((people) => {
+          const { id, name, email } = people;
+          return (
+            <div className="item" key={id}>
+              <h4>{name}</h4>
+              <p>{email}</p>
+            </div>
+          );
+        })}
+      </article>
+    </>
+  );
 };
 
 export default ControlledInputs;
